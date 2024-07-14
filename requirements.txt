@@ -2,7 +2,6 @@ asgiref==3.8.1
 astroid==2.15.5
 async-timeout==4.0.3
 attrs==20.3.0
-aws-cfn-bootstrap==2.0
 awscli==2.15.30
 awscrt==0.19.19
 Babel==2.9.1
