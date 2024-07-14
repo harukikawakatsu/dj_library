@@ -28,12 +28,7 @@ DJ-libraryは、Spotify APIを利用して楽曲の特徴量を取得し、ユ�
 
 - **フロントエンド**：React.js
 - **バックエンド**：Django
-- **データベース**：SQLite
 - **その他**：Spotify API, AWS
-
-## ER図
-
-![ER図](path/to/your/er-diagram.png)
 
 ## 画面遷移図
 
