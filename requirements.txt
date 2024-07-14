@@ -65,4 +65,4 @@ redis==5.0.7
 requests==2.25.1
 ruamel.yaml==0.16.6
 ruamel.yaml.clib==0.1.2
-
+spotipy
