@@ -132,11 +132,11 @@ function Main() {
 
         <div className='Recommend_Songs'>
           <Button onClick={save_selected_songs} variant="contained" style={{ backgroundColor: 'blue' }} startIcon={<MusicNoteIcon />} sx={{ mt: 2 }}>
-            曲を推薦
+            Playlistを作成
           </Button>
 
           <Typography variant="h4" component="div" sx={{ mt: 4 }}>
-            推薦された曲
+            Playlist
           </Typography>
           <SearchSongResults songs={recommendations} />
         </div>

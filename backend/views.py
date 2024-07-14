@@ -56,7 +56,7 @@ def search_songs(request):
 @api_view(['POST'])
 def save_selected_songs(request):
     if request.method == 'POST':
-        selected_songs = request.data.getlist('selected_songs')
+        selected_songs = request.data.get('selected_songs',[])
         spotify = get_spotify_client()
         track_ids = []
         for song_id in selected_songs:
@@ -98,7 +98,7 @@ def save_selected_songs(request):
             
             track_ids.append(track_f[0])
         
-        recommended_tracks = get_recommendations(track_ids, 10)#第二引数おすすめの数
+        recommended_tracks = get_recommendations(track_ids, 20)#第二引数おすすめの数
         
         for track in recommended_tracks:
             track_id = track.pop('id')
