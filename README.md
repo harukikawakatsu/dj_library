@@ -10,7 +10,7 @@ DJに向けて楽曲の推薦と最適なプレイリストの提案を行いま
 DJ Libraryは、DJがプレイリストを作成する際に役立つツールを提供することを目的として開発されました。楽曲の特徴量に基づいて、似たような雰囲気の曲を簡単に見つけることができます。
 
 ## サービスのURL
-[サービスのURL](https://your-service-url.com)
+[サービスのURL](https://djlibrary-eff32ad73f3d.herokuapp.com/)
 
 ## アプリに込めた思い
 
@@ -28,12 +28,7 @@ DJ-libraryは、Spotify APIを利用して楽曲の特徴量を取得し、ユ�
 
 - **フロントエンド**：React.js
 - **バックエンド**：Django
-- **データベース**：SQLite
 - **その他**：Spotify API, AWS
-
-## ER図
-
-![ER図](path/to/your/er-diagram.png)
 
 ## 画面遷移図
 
