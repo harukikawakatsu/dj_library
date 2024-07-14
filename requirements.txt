@@ -9,7 +9,7 @@ botocore==1.34.132
 cffi==1.14.5
 chardet==4.0.0
 chevron==0.13.1
-cloud-init==22.2.2
+cloud-init
 colorama==0.4.4
 configobj==5.0.6
 cryptography==36.0.1
