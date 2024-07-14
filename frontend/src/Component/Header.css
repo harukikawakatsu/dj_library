@@ -6,6 +6,7 @@
   background-color: #333333;
   padding: 10px 20px;
   height: 60px;
+  position: relative;
 }
 
 .header-left {
@@ -51,10 +52,69 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-line {
   width: 100%;
   height: 2px;
   background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-icon.open .menu-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.open .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.open .menu-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.sidebar {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  width: 300px;
+  height: calc(100% - 60px);
+  background-color: #1a0b05; /* 茶色に設定 */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar h2, .sidebar p, .sidebar h3, .sidebar ol, .sidebar ul, .sidebar li {
+  color: #ffffff; /* 白色に設定 */
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.sidebar h3 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.sidebar ol, .sidebar ul {
+  margin-left: 20px;
+}
+
+.sidebar li {
+  margin-bottom: 8px;
 }
