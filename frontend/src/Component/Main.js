@@ -39,21 +39,6 @@ function Main() {
 
     }; 
 
-    const recommend_songs = async () => {
-      const response = await fetch('http://127.0.0.1:8000/recommend/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ songs: songList }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setRecommendations(data);
-      } else {
-        console.error('推薦曲の取得に失敗しました');
-      }
-    };
   
 
     const save_selected_songs = async () => {
@@ -69,7 +54,7 @@ function Main() {
         const data = await response.json();
         setRecommendations(data);
       } else {
-        console.error('曲の保存に失敗しました');
+        console.error('playlistの作成に失敗しました');
       }
     };
 
@@ -86,11 +71,6 @@ function Main() {
         </div>
       );
     }
-  //   else {
-  //   return songList.map((songs, index) => (
-  //     <SearchSongResults key={index} songs={[songs]} />
-  //   ));
-  // } 
   }
 
 
@@ -141,46 +121,6 @@ function Main() {
           <SearchSongResults songs={recommendations} />
         </div>
 
-
-        
-        {/* {display_songs(songList)} */}
-        
-
-        {/* <div className='input-SongList'>
-          <div className='input-Box'>
-            {filteredSongs.map((song, index) => (
-              <Box key={index} sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  value={song}
-                  style={{backgroundColor: '#303030'}}
-                  InputProps={{
-                    readOnly: true,
-                    style: {color: 'white'}
-                  }}
-                />
-              </Box>
-            ))}
-          </div>
-        </div> */}
-        
-
-        {/* <div>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="新しい曲を追加..."
-            value={newSong}
-            onChange={(e) => setNewSong(e.target.value)}
-            InputProps={{
-              style: { color: 'white' } 
-            }}
-          />
-          <Button onClick={addSong} variant="contained" style={{backgroundColor: 'green'}} startIcon={<AddIcon />} sx = {{mb:2}}>
-            曲を追加
-          </Button>
-        </div> */}
       </Container>
 
     </div>
