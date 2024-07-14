@@ -11,11 +11,13 @@ function Main() {
   const [songList, setSongList] = useState([]);
   const [newSong, setNewSong] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchSong, setSearchSong] = useState('');
+  const [recommendations, setRecommendations] = useState([]);
 
-  const addSong = () => {
-    if (newSong.trim() !== '') {
-      setSongList([...songList, newSong]);
-      setNewSong('');
+
+  const addSong = (song) => {
+    if (song){
+      setSongList([...songList, song]);
     }
   };
 
@@ -29,7 +31,7 @@ function Main() {
     });
       if (response.ok) {
         const data = await response.json();
-        setSongList(data);
+        setSearchSong(data);
       }
       else {
         console.error('曲の検索に失敗しました');
@@ -37,8 +39,44 @@ function Main() {
 
     }; 
 
+    const recommend_songs = async () => {
+      const response = await fetch('http://127.0.0.1:8000/recommend/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ songs: songList }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setRecommendations(data);
+      } else {
+        console.error('推薦曲の取得に失敗しました');
+      }
+    };
+  
+
+    const save_selected_songs = async () => {
+      const selectedSongIds = songList.map(song => song.id);
+      const response = await fetch('http://127.0.0.1:8000/save/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ selected_songs: selectedSongIds }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setRecommendations(data);
+      } else {
+        console.error('曲の保存に失敗しました');
+      }
+    };
+
+
+
   function display_songs(songList) {
-    if (songList.length == [] && !Array.isArray(songList)) {
+    if (songList.length == [] || !Array.isArray(songList)) {
       return (
         <div className='no-songs'>
           <Typography variant="h5" component="div">
@@ -48,14 +86,13 @@ function Main() {
         </div>
       );
     }
-    else {
-    return songList.map((songs, index) => (
-      <SearchSongResults key={index} songs={[songs]} />
-    ));
-  } }
+  //   else {
+  //   return songList.map((songs, index) => (
+  //     <SearchSongResults key={index} songs={[songs]} />
+  //   ));
+  // } 
+  }
 
-
-  const filteredSongs = songList.filter(song => song.name && song.name.includes(searchTerm));
 
   return (
     <div className='main'>
@@ -68,7 +105,6 @@ function Main() {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setNewSong(e.target.value);
               search_songs();
             }
           }
@@ -80,15 +116,34 @@ function Main() {
             }}
           />
 
-          {/* <SearchSongResults songs={songList} /> */}
+          <SearchSongResults songs={searchSong} />
 
           <div className='Search_Song_add'>
-            <Button onClick={addSong} variant="contained" style={{backgroundColor: 'green'}} startIcon={<AddIcon />} sx = {{mb:2}}>
+            <Button onClick={()=>addSong(searchSong[0])} variant="contained" style={{backgroundColor: 'green'}} startIcon={<AddIcon />} sx = {{mb:2}}>
               曲を追加
             </Button>
           </div>
         </div>
-        {display_songs(songList)}
+
+        <Typography variant="h4" component="div" sx={{ mt: 4 }}>
+          保存された曲
+        </Typography>
+        <SearchSongResults songs={songList} />
+
+        <div className='Recommend_Songs'>
+          <Button onClick={save_selected_songs} variant="contained" style={{ backgroundColor: 'blue' }} startIcon={<MusicNoteIcon />} sx={{ mt: 2 }}>
+            曲を推薦
+          </Button>
+
+          <Typography variant="h4" component="div" sx={{ mt: 4 }}>
+            推薦された曲
+          </Typography>
+          <SearchSongResults songs={recommendations} />
+        </div>
+
+
+        
+        {/* {display_songs(songList)} */}
         
 
         {/* <div className='input-SongList'>

@@ -108,3 +108,22 @@ def save_selected_songs(request):
             )
         return JsonResponse(recommended_tracks, status=201, safe = False)
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@api_view(['POST'])
+def recommend_songs(request):
+    if request.method == 'POST':
+        saved_songs = request.data.get('songs', [])
+        if not saved_songs:
+            return JsonResponse({'error': 'No saved songs provided'}, status=400)
+
+        spotify = get_spotify_client()
+        recommendations = []
+
+        for song in saved_songs:
+            # ここでは、保存された曲のIDを使って推薦を取得
+            results = spotify.recommendations(seed_tracks=[song['id']], limit=3)  # 例として各曲に対して2つの推薦を取得
+            recommendations.extend(results['tracks'])
+
+        return JsonResponse(recommendations, safe=False)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)

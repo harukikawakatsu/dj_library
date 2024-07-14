@@ -2,7 +2,12 @@ import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 
 function SearchSongResults({ songs }) {
+  if (!Array.isArray(songs)) {
+    return null;
+  }
+  
   return (
+    
     <div>
       {songs.map((song, index) => (
         <Card key={index} sx={{ mb: 2 }}>
