@@ -30,9 +30,6 @@ DJ-libraryは、Spotify APIを利用して楽曲の特徴量を取得し、ユ�
 - **バックエンド**：Django
 - **その他**：Spotify API, AWS
 
-## 画面遷移図
-
-![画面遷移図](path/to/your/screen-transition-diagram.png)
 
 ## 今後の展望
 
